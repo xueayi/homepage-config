@@ -64,14 +64,15 @@ docker compose up -d
 
 仓库中所有密钥均已替换为占位符，**克隆后请直接在 `config/services.yaml` 中填入真实值**：
 
-| 位置 | 占位符 | 说明 |
+| 位置 | 占位符 | 替换为真实值 |
 |---|---|---|
-| Emby widget `key` | `${HOMEPAGE_VAR_EMBY_KEY}` | Emby 设置 → 高级 → API 密钥 |
-| Komga widget `key` | `${HOMEPAGE_VAR_KOMGA_KEY}` | Komga 管理员生成 |
-| DeepSeek `Authorization` | `${HOMEPAGE_VAR_DEEPSEEK_KEY}` | DeepSeek 开放平台 API Key |
+| Emby widget `key` | `your-emby-api-key` | Emby 设置 → 高级 → API 密钥 |
+| Komga widget `key` | `your-komga-api-key` | Komga 管理员生成 |
+| DeepSeek `Authorization` | `sk-your-deepseek-api-key` | DeepSeek 开放平台 API Key |
+| 阿里云 glances `url` | `198.51.100.10` / `198.51.100.20` | 你的服务器公网 IP |
 
-> 注：homepage 官方文档称支持 `${HOMEPAGE_VAR_*}` 环境变量替换，
-> 但实测 v2.4.0 中该替换未生效，请直接填入真实值，或自行验证。
+> 仓库带有 pre-commit 钩子：一旦提交内容包含真实密钥/密码/公网 IP 会直接被拦截，
+> 确保真实配置永远不会被推送到 GitHub。
 
 两台阿里云服务器的 glances 地址为占位（`lightsail.example.com` / `ecs.example.com`），
 请替换为你的实际地址，或在 `config/services.yaml` 的设备分组中删除这两张卡片。

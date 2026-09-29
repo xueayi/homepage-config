@@ -37,7 +37,7 @@
         description: Xeon · 2核1G
         widget:
           type: glances
-          url: http://lightsail.example.com:61208
+          url: http://198.51.100.10:61208
           version: 4
           metric: cpu
     - 阿里云 ECS:
@@ -45,7 +45,7 @@
         description: Xeon · 2核1.6G
         widget:
           type: glances
-          url: http://ecs.example.com:61208
+          url: http://198.51.100.20:61208
           version: 4
           metric: cpu
 
@@ -76,7 +76,7 @@
           type: customapi
           url: https://api.deepseek.com/user/balance
           headers:
-            Authorization: Bearer ${HOMEPAGE_VAR_DEEPSEEK_KEY}
+            Authorization: Bearer sk-your-deepseek-api-key
           refreshInterval: 600000
           mappings:
             - field: balance_infos[0].total_balance
@@ -112,7 +112,7 @@
         widget:
           type: komga
           url: http://192.168.6.27:25600
-          key: ${HOMEPAGE_VAR_KOMGA_KEY}
+          key: your-komga-api-key
     - Uptime Kuma:
         icon: /icons/uptime-kuma.png
         href: http://192.168.6.27:13002
@@ -152,7 +152,7 @@
         widget:
           type: emby
           url: http://192.168.6.27:18096
-          key: ${HOMEPAGE_VAR_EMBY_KEY}
+          key: your-emby-api-key
           enableBlocks: true
     - MoviePilot:
         icon: /icons/movie-open.png
