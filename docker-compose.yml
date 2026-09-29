@@ -1,0 +1,30 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    ports:
+      - 13000:3000
+    environment:
+      TZ: Asia/Shanghai
+      HOMEPAGE_ALLOWED_HOSTS: "192.168.6.27:13000,localhost:3000,127.0.0.1:3000,fnos.xueayi.site"
+    volumes:
+      - ./config:/app/config
+      - ./icons:/app/public/icons
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - "/vol3/1000/01_Personal_Files/03_壁纸收集/横版:/app/public/backgrounds:ro"
+      - /fs:/fs:ro
+      - /vol1:/vol1:ro
+      - /vol2:/vol2:ro
+      - /vol3:/vol3:ro
+      - /vol4:/vol4:ro
+      - /vol5:/vol5:ro
+
+  glances-fnos:
+    image: nicolargo/glances:latest
+    container_name: glances-fnos
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Asia/Shanghai
+    command: glances -w

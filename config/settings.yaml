@@ -1,0 +1,34 @@
+language: zh-CN
+theme: dark
+color: amber
+target: _blank
+
+# 展开显示 docker 容器的 CPU / 内存占用（依赖 docker.yaml 的 socket 集成）
+showStats: true
+
+# 状态以彩色圆点显示
+statusStyle: dot
+
+# 同组卡片强制等高，条带内上下对齐
+useEqualHeights: true
+
+# 每个分组一条横向条带，消除纵向留白；顺序：设备 → 工具 → 服务 → 影音娱乐 → 资讯
+layout:
+  设备:
+    style: row
+    columns: 6
+  工具:
+    style: row
+    columns: 4
+  下载:
+    style: row
+    columns: 2
+  服务:
+    style: row
+    columns: 5
+  影音娱乐:
+    style: row
+    columns: 2
+  资讯:
+    style: row
+    columns: 2

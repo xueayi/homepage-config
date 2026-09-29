@@ -1,0 +1,39 @@
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: short
+      timeStyle: short
+      hourCycle: h23
+- openmeteo:
+    label: 上海浦东
+    latitude: 31.2054
+    longitude: 121.5933
+    units: metric
+    cache: 10
+- resources:
+    label: CPU
+    cpu: true
+- resources:
+    label: 内存
+    memory: true
+- resources:
+    label: vol1
+    disk: /vol1
+- resources:
+    label: vol2
+    disk: /vol2
+- resources:
+    label: vol3
+    disk: /vol3
+- resources:
+    label: vol4
+    disk: /vol4
+- resources:
+    label: vol5
+    disk: /vol5
+- search:
+    provider:
+      - baidu
+      - google
+    focus: true
+    target: _blank
