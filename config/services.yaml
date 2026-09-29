@@ -1,6 +1,6 @@
 - 设备:
     - 飞牛 NAS:
-        icon: mdi-nas
+        icon: /icons/nas.png
         description: i3-8100 · 23G
         widget:
           type: glances
@@ -8,7 +8,7 @@
           version: 4
           metric: cpu
     - Ubuntu:
-        icon: mdi-ubuntu
+        icon: /icons/ubuntu.png
         description: Athlon 300U · 3.5G
         widget:
           type: glances
@@ -16,7 +16,7 @@
           version: 4
           metric: cpu
     - Mac mini:
-        icon: mdi-apple
+        icon: /icons/apple.png
         description: Apple M4 · 16G
         widget:
           type: glances
@@ -24,7 +24,7 @@
           version: 4
           metric: cpu
     - iStoreOS:
-        icon: mdi-router-network
+        icon: /icons/openwrt.png
         href: http://192.168.6.231
         description: ARM 软路由 · 2G
         widget:
@@ -33,7 +33,7 @@
           version: 4
           metric: cpu
     - 阿里云轻量:
-        icon: si-alibabacloud
+        icon: /icons/alibabacloud.png
         description: Xeon · 2核1G
         widget:
           type: glances
@@ -41,7 +41,7 @@
           version: 4
           metric: cpu
     - 阿里云 ECS:
-        icon: si-alibabacloud
+        icon: /icons/alibabacloud.png
         description: Xeon · 2核1.6G
         widget:
           type: glances
@@ -51,25 +51,25 @@
 
 - 工具:
     - PanSou 盘搜:
-        icon: mdi-magnify
+        icon: /icons/magnify.png
         href: http://192.168.6.27:10805
         description: 网盘资源聚合搜索
         server: fnos-local
         container: pansou-app
     - AstrBot:
-        icon: mdi-robot
+        icon: /icons/robot.png
         href: http://192.168.6.27:16185
         description: 聊天机器人
         server: fnos-local
         container: astrbot
     - Wol_xyz:
-        icon: mdi-ethernet
+        icon: /icons/ethernet.png
         href: http://192.168.6.27:39090
         description: 局域网设备管理
         server: fnos-local
         container: wol-xyz
     - DeepSeek:
-        icon: si-deepseek
+        icon: /icons/deepseek.png
         href: https://platform.deepseek.com/
         description: AI API 余额
         widget:
@@ -84,7 +84,7 @@
 
 - 下载:
     - qBittorrent PT:
-        icon: qbittorrent.png
+        icon: /icons/qbittorrent.png
         href: http://192.168.6.27:8085
         description: PT 下载器
         server: fnos-local
@@ -93,7 +93,7 @@
           type: qbittorrent
           url: http://192.168.6.27:8085
     - qBittorrent BT:
-        icon: qbittorrent.png
+        icon: /icons/qbittorrent.png
         href: http://192.168.6.27:8080
         description: BT 下载器
         server: fnos-local
@@ -104,7 +104,7 @@
 
 - 服务:
     - Komga:
-        icon: komga.png
+        icon: /icons/komga.png
         href: http://192.168.6.27:25600
         description: 漫画书库
         server: fnos-local
@@ -114,7 +114,7 @@
           url: http://192.168.6.27:25600
           key: ${HOMEPAGE_VAR_KOMGA_KEY}
     - Uptime Kuma:
-        icon: uptime-kuma.png
+        icon: /icons/uptime-kuma.png
         href: http://192.168.6.27:13002
         description: 服务监控
         server: fnos-local
@@ -124,19 +124,19 @@
           url: http://192.168.6.27:13002
           slug: kuma
     - Memos:
-        icon: memos.png
+        icon: /icons/memos.png
         href: http://192.168.6.27:5230
         description: 随手记
         server: fnos-local
         container: memos
     - Cloudreve:
-        icon: cloudreve.png
+        icon: /icons/cloudreve.png
         href: http://192.168.6.27:5212
         description: 网盘
         server: fnos-local
         container: cloudreve
     - PeerBanHelper:
-        icon: mdi-shield-alert
+        icon: /icons/shield-alert.png
         href: http://192.168.6.27:9898
         description: PT 反吸血
         server: fnos-local
@@ -144,7 +144,7 @@
 
 - 影音娱乐:
     - Emby:
-        icon: emby.png
+        icon: /icons/emby.png
         href: http://192.168.6.27:18096
         description: 魔法少女交流中心
         server: fnos-local
@@ -155,7 +155,7 @@
           key: ${HOMEPAGE_VAR_EMBY_KEY}
           enableBlocks: true
     - MoviePilot:
-        icon: mdi-movie-open
+        icon: /icons/movie-open.png
         href: http://192.168.6.27:13003
         description: 媒体库自动化
         server: fnos-local
@@ -163,7 +163,7 @@
 
 - 资讯:
     - B站热门:
-        icon: bilibili.png
+        icon: /icons/bilibili.png
         href: https://www.bilibili.com/
         description: 全站热门视频
         widget:
@@ -181,7 +181,7 @@
             limit: 10
             target: https://www.bilibili.com/video/{bvid}
     - 知乎日报:
-        icon: si-zhihu
+        icon: /icons/zhihu.png
         href: https://daily.zhihu.com/
         description: 每日精选
         widget:

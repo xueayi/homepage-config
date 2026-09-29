@@ -60,17 +60,18 @@ docker compose up -d
 | 等高卡片 | `useEqualHeights: true` |
 | 背景遮罩浓度 | `custom.css` 段落 3 的 rgba 透明度 |
 
-## 🔐 密钥与占位符
+## 🔐 密钥占位符
 
-仓库中所有密钥均已脱敏为 `${HOMEPAGE_VAR_*}` 占位符（homepage 原生支持环境变量替换）。
-部署时在 `docker-compose.yml` 的 homepage 服务 `environment` 中填入真实值即可：
+仓库中所有密钥均已替换为占位符，**克隆后请直接在 `config/services.yaml` 中填入真实值**：
 
-```yaml
-environment:
-  HOMEPAGE_VAR_EMBY_KEY: your-emby-api-key       # Emby 设置 → 高级 → API 密钥
-  HOMEPAGE_VAR_KOMGA_KEY: your-komga-api-key     # Komga 管理员生成
-  HOMEPAGE_VAR_DEEPSEEK_KEY: sk-xxxx             # DeepSeek 开放平台 API Key
-```
+| 位置 | 占位符 | 说明 |
+|---|---|---|
+| Emby widget `key` | `${HOMEPAGE_VAR_EMBY_KEY}` | Emby 设置 → 高级 → API 密钥 |
+| Komga widget `key` | `${HOMEPAGE_VAR_KOMGA_KEY}` | Komga 管理员生成 |
+| DeepSeek `Authorization` | `${HOMEPAGE_VAR_DEEPSEEK_KEY}` | DeepSeek 开放平台 API Key |
+
+> 注：homepage 官方文档称支持 `${HOMEPAGE_VAR_*}` 环境变量替换，
+> 但实测 v2.4.0 中该替换未生效，请直接填入真实值，或自行验证。
 
 两台阿里云服务器的 glances 地址为占位（`lightsail.example.com` / `ecs.example.com`），
 请替换为你的实际地址，或在 `config/services.yaml` 的设备分组中删除这两张卡片。
