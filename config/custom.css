@@ -19,9 +19,16 @@ html.dark {
 
 /* ---- 2. 背景三层（gitea 结构）----
    body::before  壁纸层，一次预模糊（变量由 custom.js 注入）
-   body::after   遮罩层，均匀暗化 + 四周暗角 */
-html.dark body {
+   body::after   遮罩层，均匀暗化 + 四周暗角
+   ⚠ 底色必须挂在 html 上、body 保持透明：
+     homepage 主题（如 theme-rose）会给 html 设不透明底色，此时 body 的
+     background-color 不再上传到画布，而是作为普通盒子绘制——会整块盖住
+     z-index:-2 的 body::before 壁纸层（壁纸「加载不出来」的真凶）。 */
+html.dark {
   background-color: #0b0714;
+}
+html.dark body {
+  background-color: transparent;
 }
 html.dark body::before {
   content: "";
