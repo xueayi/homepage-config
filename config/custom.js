@@ -98,6 +98,8 @@
   }
 
   /* ============ 4. 雪花引擎（canvas 六角晶簇，三层视差） ============ */
+  /* 飘落速度系数：1 = 原速。0.55 ≈ 半速，飘落更舒缓 */
+  var SNOW_SLOW = 0.55;
   var snowCanvas = null, snowRAF = 0, snowResize = null, snowDraw = null;
   function startSnow() {
     if (snowCanvas) return;
@@ -121,7 +123,7 @@
         x: Math.random() * W,
         y: Math.random() * H,
         r: 1.1 + layer * 2.6 + Math.random() * 1.1,
-        sp: 0.35 + layer * 1.05 + Math.random() * 0.5,
+        sp: (0.35 + layer * 1.05 + Math.random() * 0.5) * SNOW_SLOW,
         ph: Math.random() * Math.PI * 2,
         sw: 0.4 + Math.random() * 0.8,
         rot: Math.random() * Math.PI * 2,
@@ -131,15 +133,19 @@
       });
     }
     var t = 0;
-    snowDraw = function () {
+    var last = 0; /* 时间步长归一：以 60fps 为 1 倍，避免 120Hz 屏上雪花快一倍 */
+    snowDraw = function (now) {
       if (!snowCanvas) return;
-      t += 0.016;
+      if (!last) last = now;
+      var dt = Math.min((now - last) / 16.667, 3);
+      last = now;
+      t += 0.016 * dt;
       ctx.clearRect(0, 0, W, H);
       for (var i = 0; i < flakes.length; i++) {
         var f = flakes[i];
-        f.y += f.sp;
-        f.x += Math.sin(t * f.sw + f.ph) * 0.45;
-        f.rot += f.rs;
+        f.y += f.sp * dt;
+        f.x += Math.sin(t * f.sw + f.ph) * 0.45 * dt;
+        f.rot += f.rs * dt;
         if (f.y > H + 12) { f.y = -12; f.x = Math.random() * W; }
         if (f.x < -12) f.x = W + 12; else if (f.x > W + 12) f.x = -12;
         drawFlake(ctx, f);
