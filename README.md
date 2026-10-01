@@ -1,21 +1,26 @@
 # Homepage Docker 配置
 
 基于 [gethomepage/homepage](https://github.com/gethomepage/homepage) v2.4 的个人 NAS 仪表盘完整配置，
-运行于飞牛 fnOS（192.168.6.27）Docker，包含自定义 iOS 毛玻璃主题、CPU 圆环仪表、
-主题/壁纸切换、全屋设备监控与下载器面板。
+运行于飞牛 fnOS（192.168.6.27）Docker。主题为「樱夜 · Sakura」，与
+[gitea-sakura-theme](https://github.com/xueayi/gitea-sakura-theme) 同构：
+预模糊壁纸层 + 无卡片毛玻璃 + 可拖动浮窗切换器。
 
 ![homepage](https://img.shields.io/badge/gethomepage-v2.4-2f6feb)
 
 ## ✨ 功能亮点
 
-- **iOS 毛玻璃材质卡片**：18px 外圆角 / 12px 内圆角、blur+saturate 玻璃层、发丝高光、环境阴影
+- **樱夜主题**：樱花粉强调色、夜紫底阶、暗角遮罩，视觉与 gitea-sakura-theme 一致
+- **高性能背景**：壁纸走 `body::before` 单层 `filter: blur()` 预模糊，
+  卡片**不使用 backdrop-filter**（23 张卡片仅 2 个轻模糊元素，对比旧版 26 个重模糊层）
+- **浮窗切换器（可拖动）**：右下角 🌸 按钮，位置记忆，面板含
+  壁纸（9 张缩略图直选）/ 飘落特效（无/🌸樱花/❄雪花）/ 背景模糊（关/轻/中/强）/ 点击迸溅
+- **飘落特效**：樱花为 CSS 动画花瓣（零 JS 帧循环），雪花为 canvas 六角晶簇三层视差，
+  页面隐藏时自动暂停渲染
 - **CPU 圆环仪表**：设备卡片的 glances 占用以 conic-gradient 圆环显示（custom.js 动态驱动）
-- **一键换配色**：右下角按钮循环 琥珀/翡翠/晴空/紫罗兰/玫瑰 五套强调色（localStorage 记忆）
-- **一键换壁纸**：右下角按钮循环 NAS 壁纸目录中的横版壁纸，自动叠加渐变遮罩保证文字可读
-- **顶栏磁盘监控**：宿主机各存储卷（vol1~vol5）实时空闲容量，盘名标注
+- **自制双页签**：主页 / 资讯 分组切换（绕过 homepage v2.4.0 原生 tab 渲染 bug）
+- **顶栏磁盘监控**：宿主机各存储卷（vol1~vol5）实时空闲容量
 - **下载器面板**：双 qBittorrent（PT/BT）做种/速率 + 容器资源占用
 - **服务状态**：全部容器绑定状态点与 CPU/内存/网络实时数据（`showStats: true`）
-- **Emby / Komga / Uptime Kuma** 数据面板，DeepSeek API 余额显示
 
 ## 📁 目录结构
 
@@ -27,10 +32,27 @@
 │   ├── settings.yaml       # 主题、布局、showStats
 │   ├── widgets.yaml        # 顶栏信息组件（时钟/天气/CPU/内存/磁盘）
 │   ├── bookmarks.yaml      # 书签（当前停用）
-│   ├── custom.css          # iOS 材质主题（13 个编号段落）
-│   └── custom.js           # 配色/壁纸切换按钮 + 圆环驱动
+│   ├── custom.css          # 樱夜主题（15 个编号段落）
+│   └── custom.js           # 浮窗切换器 + 壁纸/特效引擎 + 圆环驱动
+├── backgrounds/            # 壁纸（挂载到 /app/public/bg）
+│   └── sakura-night.svg    # 自绘默认壁纸（其余 .webp 见下方说明）
+├── tools/
+│   └── build-backgrounds.py  # 壁纸库 → WebP + 缩略图 生成脚本
 └── icons/                  # 本地图标（优先于 CDN 加载）
 ```
+
+## 🖼 壁纸说明（版权）
+
+个人收藏的动漫壁纸**因版权原因不入库**（`.gitignore` 已排除 `backgrounds/*.webp`），
+仓库只包含自绘的 `sakura-night.svg`。使用自己的壁纸：
+
+```bash
+# 把原图放进某个目录（文件名见脚本内 MAP 表，可自行修改）
+python3 tools/build-backgrounds.py <壁纸目录> backgrounds/
+```
+
+生成后，在 `config/custom.js` 的 `WALLS` 数组中登记 slug / 名称 /
+暗化 `dim`（0~1）/ 基础模糊 `blur`（px）即可进入浮窗选择。
 
 ## 🚀 部署
 
@@ -47,18 +69,19 @@ docker compose up -d
      socket: /var/run/docker.sock
    ```
 2. compose 中按需修改磁盘挂载路径（`/fs`、`/vol1`~`/vol5` 为 fnOS 存储卷）
-3. 壁纸目录挂载（`/app/public/backgrounds:ro`）放入横版壁纸，并在
-   `config/custom.js` 的 `BGS` 数组里登记文件名即可进入轮换
+3. 壁纸挂载：`./backgrounds:/app/public/bg:ro`（仓库默认已含），
+   按「壁纸说明」生成 webp 后即可使用
 
 ## 🔧 常用调整
 
 | 想改什么 | 位置 |
 |---|---|
-| 强调色 / 圆环 / 状态点 | `config/settings.yaml` 的 `color` |
-| 毛玻璃浓度 / 圆角 / 遮罩 | `config/custom.css` 对应编号段落 |
+| 强调色 / 圆环 / 状态点 | `config/settings.yaml` 的 `color`（樱粉配 `custom.css` 段落 1） |
+| 壁纸暗化/模糊参数 | `config/custom.js` 的 `WALLS` 数组 |
+| 遮罩浓度 / 暗角 | `config/custom.css` 段落 2 的 `body::after` |
+| 玻璃卡片质感 | `config/custom.css` 段落 3（刻意无 backdrop-filter，勿加回） |
 | 分组顺序与列数 | `config/settings.yaml` 的 `layout` 块（顺序即显示顺序） |
-| 等高卡片 | `useEqualHeights: true` |
-| 背景遮罩浓度 | `custom.css` 段落 3 的 rgba 透明度 |
+| 粒子数量 | `custom.js` 中 `startPetals`（樱花）/ `startSnow`（雪花） |
 
 ## 🔐 密钥占位符
 
@@ -89,3 +112,4 @@ docker compose up -d
 - [gethomepage/homepage](https://github.com/gethomepage/homepage)
 - [walkxcode/dashboard-icons](https://github.com/walkxcode/dashboard-icons)
 - 配置思路参考：[Mikusa 的 Homepage 教程](https://www.himiku.com/archives/homepage.html)
+- 樱夜主题与 [gitea-sakura-theme](https://github.com/xueayi/gitea-sakura-theme) 同源同构

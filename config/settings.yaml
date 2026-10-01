@@ -1,6 +1,6 @@
 language: zh-CN
 theme: dark
-color: amber
+color: rose
 target: _blank
 
 # 展开显示 docker 容器的 CPU / 内存占用（依赖 docker.yaml 的 socket 集成）
@@ -12,7 +12,7 @@ statusStyle: dot
 # 同组卡片强制等高，条带内上下对齐
 useEqualHeights: true
 
-# 每个分组一条横向条带，消除纵向留白；顺序：设备 → 工具 → 服务 → 影音娱乐 → 资讯
+# 资讯独立 Tab；其余全部服务合并为一个大类
 layout:
   设备:
     style: row

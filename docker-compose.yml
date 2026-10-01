@@ -13,6 +13,8 @@ services:
       - ./icons:/app/public/icons
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - "/vol3/1000/01_Personal_Files/03_壁纸收集/横版:/app/public/backgrounds:ro"
+      # 主题用壁纸：由 tools/build-backgrounds.py 从壁纸库生成的 WebP + 缩略图
+      - ./backgrounds:/app/public/bg:ro
       - /fs:/fs:ro
       - /vol1:/vol1:ro
       - /vol2:/vol2:ro

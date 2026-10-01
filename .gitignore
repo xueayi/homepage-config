@@ -1,2 +1,7 @@
 .DS_Store
 config/logs/
+
+# 个人壁纸（版权原因不入库，用 tools/build-backgrounds.py 本地生成）
+backgrounds/*.webp
+backgrounds/thumbs/
+!backgrounds/sakura-night.svg

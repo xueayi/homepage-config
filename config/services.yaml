@@ -142,6 +142,17 @@
         server: fnos-local
         container: peerbanhelper
 
+    - Gitea:
+        icon: /icons/gitea.png
+        href: http://192.168.6.27:12000
+        description: 自建 Git 仓库
+        server: fnos-local
+        container: gitea
+        widget:
+          type: gitea
+          url: http://192.168.6.27:12000
+          key: your-gitea-api-token
+
 - 影音娱乐:
     - Emby:
         icon: /icons/emby.png
@@ -164,11 +175,11 @@
 - 资讯:
     - B站热门:
         icon: /icons/bilibili.png
-        href: https://www.bilibili.com/
+        href: https://www.bilibili.com/v/popular/all
         description: 全站热门视频
         widget:
           type: customapi
-          url: https://api.bilibili.com/x/web-interface/popular?ps=10&pn=1
+          url: https://api.bilibili.com/x/web-interface/popular?ps=8&pn=1
           refreshInterval: 600000
           headers:
             User-Agent: Mozilla/5.0
@@ -178,7 +189,7 @@
             name: title
             label: stat.view
             format: number
-            limit: 10
+            limit: 8
             target: https://www.bilibili.com/video/{bvid}
     - 知乎日报:
         icon: /icons/zhihu.png
@@ -195,3 +206,18 @@
             label: hint
             limit: 8
             target: https://daily.zhihu.com/story/{id}
+    - 抖音热点:
+        icon: /icons/douyin-fire.png
+        href: https://www.douyin.com/hot
+        description: 抖音热点榜
+        widget:
+          type: customapi
+          url: https://www.iesdouyin.com/web/api/v2/hotsearch/billboard/word/
+          refreshInterval: 900000
+          display: dynamic-list
+          mappings:
+            items: word_list
+            name: word
+            label: hot_value
+            format: number
+            limit: 8
