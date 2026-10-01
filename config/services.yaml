@@ -82,26 +82,40 @@
             - field: balance_infos[0].total_balance
               label: 余额 ¥
 
-- 下载:
+- 影音娱乐:
     - qBittorrent PT:
         icon: /icons/qbittorrent.png
         href: http://192.168.6.27:8085
-        description: PT 下载器
-        server: fnos-local
-        container: qBittorrent
+        description: PT 下载器 · 飞牛原生
         widget:
           type: qbittorrent
           url: http://192.168.6.27:8085
     - qBittorrent BT:
         icon: /icons/qbittorrent.png
         href: http://192.168.6.27:8080
-        description: BT 下载器
+        description: BT 下载器 · Docker
         server: fnos-local
         container: qBittorrent
         widget:
           type: qbittorrent
           url: http://192.168.6.27:8080
-
+    - Emby:
+        icon: /icons/emby.png
+        href: http://192.168.6.27:18096
+        description: 魔法少女交流中心
+        server: fnos-local
+        container: emby
+        widget:
+          type: emby
+          url: http://192.168.6.27:18096
+          key: your-emby-api-key
+          enableBlocks: true
+    - MoviePilot:
+        icon: /icons/movie-open.png
+        href: http://192.168.6.27:13003
+        description: 媒体库自动化
+        server: fnos-local
+        container: moviepilot-v2
 - 服务:
     - Komga:
         icon: /icons/komga.png
@@ -152,25 +166,6 @@
           type: gitea
           url: http://192.168.6.27:12000
           key: your-gitea-api-token
-
-- 影音娱乐:
-    - Emby:
-        icon: /icons/emby.png
-        href: http://192.168.6.27:18096
-        description: 魔法少女交流中心
-        server: fnos-local
-        container: emby
-        widget:
-          type: emby
-          url: http://192.168.6.27:18096
-          key: your-emby-api-key
-          enableBlocks: true
-    - MoviePilot:
-        icon: /icons/movie-open.png
-        href: http://192.168.6.27:13003
-        description: 媒体库自动化
-        server: fnos-local
-        container: moviepilot-v2
 
 - 资讯:
     - B站热门:

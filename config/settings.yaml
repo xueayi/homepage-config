@@ -20,9 +20,6 @@ layout:
   工具:
     style: row
     columns: 4
-  下载:
-    style: row
-    columns: 2
   服务:
     style: row
     columns: 5
