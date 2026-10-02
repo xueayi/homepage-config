@@ -17,15 +17,12 @@ layout:
   设备:
     style: row
     columns: 6
-  工具:
-    style: row
-    columns: 4
   服务:
     style: row
     columns: 5
   影音娱乐:
     style: row
-    columns: 2
+    columns: 4
   资讯:
     style: row
     columns: 2

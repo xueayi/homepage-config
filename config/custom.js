@@ -248,7 +248,7 @@
 
   /* ============ 7. 自制页签（homepage v2.4.0 原生 tab 有渲染 bug） ============ */
   var TABS = [
-    { id: "home", name: "主页", groups: ["设备", "工具", "下载", "服务", "影音娱乐"] },
+    { id: "home", name: "主页", groups: ["设备", "服务", "影音娱乐"] },
     { id: "news", name: "资讯", groups: ["资讯"] }
   ];
   function applyTab(id) {
